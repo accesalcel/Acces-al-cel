@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Accés al cel</title>
+
   <style>
     body {
       margin: 0;
@@ -16,7 +17,7 @@
       color: black;
       text-align: center;
       padding: 60px 20px;
-    }    
+    }
 
     h1 {
       font-size: 42px;
@@ -62,7 +63,7 @@
       padding: 20px;
     }
 
-    input, textarea {
+    input, textarea, select {
       width: 100%;
       padding: 10px;
       margin: 8px 0;
@@ -96,51 +97,55 @@
   <div class="card">
     <h2>Un lloc de pau en la natura</h2>
     <p>
-      Oferim espais en boscos d’arbres on es pot disfrutar de l'etern descans en una meravellosa zona rural ideal per a poder accedir al paradís
+      Oferim espais en boscos d’arbres on es pot disfrutar de l'etern descans en una zona natural.
     </p>
   </div>
 </section>
 
 <section id="espais" class="section">
-  <h2> Tipus d’espais</h2>
+  <h2>Tipus d’espais</h2>
 
   <div class="trees">
     <div class="card">
       <h3>Olivera Eterna</h3>
-      <p>Ideal per al somni més profund a l'arbre centenari de la saviesa i pau.</p>
+      <p>Ideal per al somni més profund.</p>
     </div>
 
     <div class="card">
       <h3>Alzina Sagrada</h3>
-      <p>Un entorn fort i simbòlic de continuïtat.</p>
+      <p>Un entorn fort i simbòlic.</p>
     </div>
 
     <div class="card">
       <h3>Pi Mediterrani</h3>
-      <p>El símbol més nostre per als nostres</p>
+      <p>Connexió amb la natura.</p>
     </div>
   </div>
 </section>
 
 <section id="reserva" class="section">
-  <h2> Reserva el teu espai</h2>
+  <h2>Reserva el teu espai</h2>
 
   <div class="card">
- <form onsubmit="enviarFormulario(event)">
-  <input type="text" name="nombre" placeholder="Nom i cognoms" required>
-  <input type="email" name="email" placeholder="Email" required>
-  <input type="tel" name="telefono" placeholder="Telèfon" required>
 
-<select name="espacio">
-  <option value="Pi Mediterrani">Pi Mediterrani</option>
-  <option value="Alzina Sagrada">Alzina Sagrada</option>
-  <option value="Olivera Eterna">Olivera Eterna</option>
-</select>
+    <form onsubmit="enviarFormulario(event)">
+      
+      <input type="text" name="nombre" placeholder="Nom i cognoms" required>
 
-  <textarea name="mensaje" placeholder="Missatge"></textarea>
+      <input type="email" name="email" placeholder="Email" required>
 
-  <button type="submit">Enviar sol·licitud</button>
-</form>
+      <input type="tel" name="telefono" placeholder="Telèfon" required>
+
+      <select name="espacio">
+        <option value="Pi Mediterrani">Pi Mediterrani</option>
+        <option value="Alzina Sagrada">Alzina Sagrada</option>
+        <option value="Olivera Eterna">Olivera Eterna</option>
+      </select>
+
+      <textarea name="mensaje" placeholder="Missatge"></textarea>
+
+      <button type="submit">Enviar sol·licitud</button>
+    </form>
 
   </div>
 </section>
@@ -156,27 +161,30 @@
 <footer>
   © 2026 Accés al cel
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<!-- EMAILJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
-(function(){
   emailjs.init("x5BHK47Oy0IL9BO01");
-})();
 
-function enviarFormulario(e) {
-  e.preventDefault();
+  function enviarFormulario(e) {
+    e.preventDefault();
 
-  emailjs.sendForm(
-    'service_gn8gjfa',
-    'template_zvkatsu',
-    e.target
-  )
-  .then(function() {
-    alert("✅ Sol·licitud enviada correctament!");
-  }, function(error) {
-    alert("❌ Error al enviar: " + JSON.stringify(error));
-  });
-}
+    emailjs.sendForm(
+      "service_gn8gjfa",
+      "template_zvkatsu",
+      e.target
+    )
+    .then(() => {
+      alert("✅ Sol·licitud enviada correctament!");
+    })
+    .catch((error) => {
+      console.log("ERROR:", error);
+      alert("❌ Error al enviar. Mira la consola.");
+    });
+  }
 </script>
+
 </body>
 </html>
