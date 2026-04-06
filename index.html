@@ -126,21 +126,22 @@
   <h2> Reserva el teu espai</h2>
 
   <div class="card">
-    <form>
-      <input type="text" placeholder="Nom i cognoms" required>
-      <input type="email" placeholder="Email" required>
-      <input type="tel" placeholder="Telèfon" required>
+ <form onsubmit="enviarFormulario(event)">
+  <input type="text" name="nombre" placeholder="Nom i cognoms" required>
+  <input type="email" name="email" placeholder="Email" required>
+  <input type="tel" name="telefono" placeholder="Telèfon" required>
 
-      <select style="width:100%; padding:10px; margin:8px 0;">
-        <option>Pi Mediterrani</option>
-        <option>Alzina Sagrada</option>
-        <option>Olivera Eterna</option>
-      </select>
+  <select name="espacio" style="width:100%; padding:10px; margin:8px 0;">
+    <option>Pi Mediterrani</option>
+    <option>Alzina Sagrada</option>
+    <option>Olivera Eterna</option>
+  </select>
 
-      <textarea placeholder="Missatge"></textarea>
+  <textarea name="mensaje" placeholder="Missatge"></textarea>
 
-      <button type="submit">Enviar sol·licitud</button>
-    </form>
+  <button type="submit">Enviar sol·licitud</button>
+</form>,
+
   </div>
 </section>
 
@@ -155,6 +156,27 @@
 <footer>
   © 2026 Accés al cel
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
+<script>
+(function(){
+  emailjs.init("x5BHK47Oy0IL9BO01");
+})();
+
+function enviarFormulario(e) {
+  e.preventDefault();
+
+  emailjs.sendForm(
+    'service_gn8gjfa',
+    'template_zvkatsu',
+    e.target
+  )
+  .then(function() {
+    alert("✅ Sol·licitud enviada correctament!");
+  }, function(error) {
+    alert("❌ Error al enviar: " + JSON.stringify(error));
+  });
+}
+</script>
 </body>
 </html>
