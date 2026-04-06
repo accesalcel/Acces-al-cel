@@ -185,6 +185,79 @@
     });
   }
 </script>
+<!-- CHATBOT IA -->
+<div id="chatbot" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  font-family: Arial;
+  overflow: hidden;
+">
 
+  <div style="background:#1e1e1e;color:white;padding:10px;">
+    🤖 Guia Accés al cel
+  </div>
+
+  <div id="chatBox" style="height:250px; overflow-y:auto; padding:10px; font-size:14px;">
+    <p><b>IA:</b> Hola! 👋 Com puc ajudar-te?</p>
+  </div>
+
+  <div style="display:flex;">
+    <input id="userMsg" placeholder="Escriu..." style="flex:1;padding:8px;border:none;border-top:1px solid #ccc;">
+    <button onclick="sendMsg()" style="background:#c0392b;color:white;border:none;padding:8px;">
+      ➤
+    </button>
+  </div>
+</div>
+
+<script>
+function addMessage(text, sender) {
+  const box = document.getElementById("chatBox");
+  box.innerHTML += `<p><b>${sender}:</b> ${text}</p>`;
+  box.scrollTop = box.scrollHeight;
+}
+
+function sendMsg() {
+  const input = document.getElementById("userMsg");
+  const text = input.value.toLowerCase();
+
+  if (!text) return;
+
+  addMessage(input.value, "Tu");
+
+  let response = "";
+
+  // 🧠 REGLAS DE LA IA (simple pero efectiva)
+  if (text.includes("hola")) {
+    response = "Hola! 😊 Soc la teva guia. Vols informació o reservar un espai?";
+  }
+  else if (text.includes("espais") || text.includes("tipus")) {
+    response = "Tenim Olivera Eterna 🌿, Alzina Sagrada 🌳 i Pi Mediterrani 🌲.";
+  }
+  else if (text.includes("olivera")) {
+    response = "Olivera Eterna: ideal per descans profund i pau interior.";
+  }
+  else if (text.includes("alzina")) {
+    response = "Alzina Sagrada: espai fort i simbòlic de continuïtat.";
+  }
+  else if (text.includes("pi")) {
+    response = "Pi Mediterrani: connexió directa amb la natura.";
+  }
+  else if (text.includes("reserva")) {
+    response = "Pots fer la reserva al formulari de la web 👇";
+  }
+  else {
+    response = "No t’he entès del tot 🤔 Pots preguntar per espais o reserves.";
+  }
+
+  setTimeout(() => addMessage(response, "IA"), 500);
+
+  input.value = "";
+}
+</script>
 </body>
 </html>
